@@ -33,15 +33,17 @@ const Card = ({ primaryImage, originalTitleText, releaseYear, titleType }) => {
         
             <div className="cards">
                 <img className="cards__img" src={primaryImage.url} alt="test"/>
+                <div className="card__description">{titleType.text}</div>
                 <div className="cards__overlay">
-                <div className="card__title">{originalTitleText.text}</div>
+               
                     <div className="card__runtime">
                         {releaseYear.year}
                         
                     </div>
-                    <div className="card__description">{titleType.text}</div>
+                    
                 </div>
-                
+                <div className="card__title">{originalTitleText.text}</div>
+                <div>{releaseYear.year} </div>
             </div>
             
        

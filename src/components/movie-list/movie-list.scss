@@ -40,3 +40,16 @@ img {
   color: black;
   border: none
 }
+
+.searchbar-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  margin-bottom: 5vw;
+}
+
+.searchbar {
+  width: 300px; /* Ajusta el ancho deseado aquí */
+  padding: 10px; /* Ajusta el relleno interno según tus preferencias */
+  /* Otros estilos de diseño si es necesario */
+}
