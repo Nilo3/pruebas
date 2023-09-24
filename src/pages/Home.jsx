@@ -4,6 +4,7 @@ import MovieSlide from "../components/movie-slide/MovieSlide";
 import MovieList from "../components/movie-list/MovieList";
 
 
+
 const Home = () => {
     return (
         <div>
@@ -16,6 +17,7 @@ const Home = () => {
            
         </div>
         <MovieList />
+       
     </div>
 
 </div>

@@ -27,14 +27,32 @@
 
 
 
+
+
 .cards__img {
    width: 13vw;
    height: 19.5vw;
-   
+   border-radius: 10px;
 
    
-    
 }
+
+@media (max-width: 960px) {
+  .cards__img {
+     width: 25vw;
+     height: 40vw;
+  }
+
+  .cards{
+    height: 40vw;
+    margin-left: 15vw;
+    margin-top: 2vw;
+  }
+}
+
+
+
+
 
 .cards__overlay {
     position: absolute;

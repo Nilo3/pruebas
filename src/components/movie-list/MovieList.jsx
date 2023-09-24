@@ -2,11 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./movie-list.scss";
 import Card from "../card/Card";
+import ReactPaginate from "react-paginate"
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [dataLoaded, setDataLoaded] = useState(false);
+
+  const handlePageClick = (data) => {
+
+    console.log(data.selected);
+
+  }
 
   useEffect(() => {
     const getMovies = {
@@ -52,6 +59,15 @@ const MovieList = () => {
           ))}
         </div>
       ) : null}
+      <ReactPaginate
+      previousLabel={"<"}
+      nextLabel={">"}
+      breakLabel={"..."}
+      pageCount={12}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={handlePageClick}
+      />
     </div>
   );
 };
