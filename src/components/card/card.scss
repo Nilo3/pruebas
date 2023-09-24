@@ -1,0 +1,75 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&display=swap');
+
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  justify-content: space-between; /* Space between cards */
+}
+
+.cards {
+    display: inline-block;
+    transition: transform .2s;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0.19rem;
+    margin-right: 2vw;
+    margin-bottom: 2vw;
+    min-width:200px;
+    height:26vw;
+    z-index:0;
+    
+
+    margin-left: 5vw;
+}
+
+
+
+.cards__img {
+   width: 13vw;
+   height: 19.5vw;
+   
+
+   
+    
+}
+
+.cards__overlay {
+    position: absolute;
+    padding: 0 1rem 1rem 1rem;
+    bottom: 0px;
+    height: 290px;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    justify-content: flex-end;
+    background-image: linear-gradient(rgb(0,0,0,0), rgb(0,0,0,1));
+    opacity: 0;
+    transition: opacity .2s;
+}   
+
+
+
+.card__title {
+    font-weight: 900;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: black;
+}
+
+.card__runtime {
+    font-size: .75rem;
+    margin-bottom: 0.25rem;
+}
+
+.card__rating {
+    float: right;
+}
+
+.card__description {
+    font-style: italic;
+    font-size: .75rem;
+    margin-bottom: 0.25rem;
+}
