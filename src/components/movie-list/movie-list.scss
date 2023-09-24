@@ -29,3 +29,14 @@ img {
   height: auto;
   /* Agrega otros estilos de imagen según sea necesario */
 }
+
+
+.active>.page-link{
+  background-color:#BE123C;
+  border-radius: 5%;
+}
+
+.page-link {
+  color: black;
+  border: none
+}

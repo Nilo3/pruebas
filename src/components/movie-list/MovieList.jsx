@@ -8,24 +8,26 @@ const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [page, setPage] = useState(1)
+
+ 
 
   const handlePageClick = (data) => {
-
-    console.log(data.selected);
-
+    setPage (data.selected+1)
+  
   }
 
   useEffect(() => {
     const getMovies = {
       method: 'GET',
-      url: 'https://moviesdatabase.p.rapidapi.com/titles',
+      url: `https://moviesdatabase.p.rapidapi.com/titles?page=${page}`,
       headers: {
         'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
         'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
       }
     };
 
-    const fetchMovies = async () => {
+    const fetchMovies = async (page) => {
       try {
         const response = await axios.request(getMovies);
         setMovies(response.data);
@@ -34,11 +36,12 @@ const MovieList = () => {
       } catch (error) {
         console.log("error al obtener peliculas", error);
         setIsLoading(false);
+        
       }
     };
 
     fetchMovies();
-  }, []);
+  }, [page]);
 
   console.log("esto es movies", movies.results);
 
@@ -63,10 +66,18 @@ const MovieList = () => {
       previousLabel={"<"}
       nextLabel={">"}
       breakLabel={"..."}
-      pageCount={12}
+      pageCount={5}
       marginPagesDisplayed={2}
       pageRangeDisplayed={5}
       onPageChange={handlePageClick}
+      containerClassName={"pagination justify-content-center"}
+      pageClassName={"page-item"}
+      pageLinkClassName={"page-link"}
+      previousClassName={"page-item"}
+      previousLinkClassName={"page-link"}
+      nextClassName={"page-link"}
+      breakLinkClassName={"page-link"}
+      activeClassName={"active"}
       />
     </div>
   );
