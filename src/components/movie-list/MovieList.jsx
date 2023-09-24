@@ -16,6 +16,7 @@ const MovieList = () => {
   const [keyword, setKeyword] = useState("")
   const [year, setYear] = useState("Año")
   const [ascdesc, setAscdesc] = useState("")
+  const [type, setType] = useState("")
   
 
 
@@ -45,15 +46,19 @@ const MovieList = () => {
     }
   }
 
-  console.log(ascdesc);
+  const handleTypes = (e) => {
+    setType(e.target.value)
+  }
 
 
+  console.log(type);
 
-  const fetchMoviesByName = async (keyword, ascdesc ) => {
+
+  const fetchMoviesByName = async (keyword, page ) => {
     try {
       const response = await axios.request({
         method: 'GET',
-        url: `https://moviesdatabase.p.rapidapi.com/titles/search/title/${keyword}`,
+        url: `https://moviesdatabase.p.rapidapi.com/titles/search/title/${keyword}?page=${page}`,
         params: {
           exact: 'false',
           startYear: '2010',
@@ -84,6 +89,34 @@ const MovieList = () => {
           startYear: '2010',
           endYear: '2023',
           sort: `${ascdesc}`,
+          
+          
+        },
+        headers: {
+          'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
+          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+        }
+      });
+      setMovies(response.data)
+      setIsLoading(false);
+      setDataLoaded(true);
+    } catch (error) {
+      console.log("error al obtener películas", error);
+      setIsLoading(false);
+    }
+  }
+
+  const fetchMoviesByType = async (page) => {
+    try {
+      const response = await axios.request({
+        method: 'GET',
+        url: `https://moviesdatabase.p.rapidapi.com/titles?page=${page}`,
+        params: {
+          startYear: '2010',
+          endYear: '2023',
+          sort: `${ascdesc}`,
+          titleType: `${type}`
+          
           
         },
         headers: {
@@ -126,13 +159,15 @@ const MovieList = () => {
   //UseEffect para que cuando apenas se monte la pagina me traiga las peliculas, se actualiza cuando se modifica page.
   useEffect(() => {
    if(keyword) {
-    fetchMoviesByName(keyword, ascdesc)
+    fetchMoviesByName(keyword, page)
    } else if(year!=="Año") {
     fetchMoviesByYear(year)
+   }else if(type!==""){
+    fetchMoviesByType(page)
    }else{
     fetchMovies(page)
    }
-  }, [page, keyword, year, ascdesc]);
+  }, [page, keyword, year, ascdesc, type]);
 
   
 
@@ -141,6 +176,7 @@ const MovieList = () => {
 //
 const years = ["Año", 2021,2022,2023]
 const ordenar = ["Ordenar", "Reciente", "Antiguo"]
+
  
 
   return (
@@ -162,6 +198,11 @@ const ordenar = ["Ordenar", "Reciente", "Antiguo"]
                 <option key={orden} value={orden}>{orden}</option>
               ))
             }
+          </select>
+          <select  onChange={handleTypes}>
+            <option value="">Todo</option>
+            <option value="movie">Peliculas</option>
+            <option value="tvSeries">Series</option>
           </select>
     
       
