@@ -15,7 +15,8 @@ const MovieList = () => {
   const [page, setPage] = useState(1)
   const [keyword, setKeyword] = useState("")
   const [year, setYear] = useState("Año")
-  const [ascdesc, setAscdesc] = useState("year.decr")
+  const [ascdesc, setAscdesc] = useState("")
+  
 
 
  
@@ -47,13 +48,16 @@ const MovieList = () => {
   console.log(ascdesc);
 
 
-  const fetchMoviesByName = async (keyword) => {
+
+  const fetchMoviesByName = async (keyword, ascdesc ) => {
     try {
       const response = await axios.request({
         method: 'GET',
         url: `https://moviesdatabase.p.rapidapi.com/titles/search/title/${keyword}`,
         params: {
           exact: 'false',
+          startYear: '2010',
+          endYear: '2023',
           sort: `${ascdesc}`
         },
         headers: {

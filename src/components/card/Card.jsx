@@ -1,54 +1,40 @@
-import React, {useEffect, useState} from "react"
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
-import "./card.scss"
-
+import React, { useEffect, useState } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "./card.scss";
 
 const Card = ({ primaryImage, originalTitleText, releaseYear, titleType }) => {
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+  }, []);
 
-   
+  return (
+    <div className="cards">
+      {isLoading ? (
+        <SkeletonTheme color="#202020" highlightColor="#444">
+          <Skeleton height={300} duration={2} />
+        </SkeletonTheme>
+      ) : (
+        <>
+          <img
+            className="cards__img"
+            src={primaryImage && primaryImage.url ? primaryImage.url : "https://camarasal.com/wp-content/uploads/2020/08/default-image-5-1.jpg"}
+            alt="test"
+          />
+          <div className="card__description">{titleType.text}</div>
+          <div className="card__title">
+            {originalTitleText && originalTitleText.text}
+          </div>
+          {releaseYear && releaseYear.year ? (
+            <div>{releaseYear.year}</div>
+          ) : null}
+        </>
+      )}
+    </div>
+  );
+};
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1500)
-    }, []) 
-
-    if (!primaryImage || !primaryImage.url) {
-      // Si primaryImage.url es null, no renderizamos el componente Card
-      return null;
-    }
-
-    return <>
-    {
-        isLoading
-        ?
-        <div className="cards">
-            <SkeletonTheme color="#202020" highlightColor="#444">
-                <Skeleton height={300} duration={2} />
-            </SkeletonTheme>
-        </div>
-        :
-        
-            <div className="cards">
-                <img className="cards__img" src={primaryImage.url} alt="test"/>
-                <div className="card__description">{titleType.text}</div>
-                <div className="cards__overlay">
-               
-                    <div className="card__runtime">
-                        {releaseYear.year}
-                        
-                    </div>
-                    
-                </div>
-                <div className="card__title">{originalTitleText.text}</div>
-                <div>{releaseYear.year} </div>
-            </div>
-            
-       
-    }
-    </>
-}
-
-export default Card
+export default Card;
