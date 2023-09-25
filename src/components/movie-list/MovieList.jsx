@@ -63,7 +63,8 @@ const MovieList = () => {
           exact: 'false',
           startYear: '2010',
           endYear: '2023',
-          sort: `${ascdesc}`
+          sort: `${ascdesc}`,
+       
         },
         headers: {
           'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
@@ -79,6 +80,61 @@ const MovieList = () => {
     }
   };
 
+  const fetchMoviesByNameAndType = async (keyword, page ) => {
+    try {
+      const response = await axios.request({
+        method: 'GET',
+        url: `https://moviesdatabase.p.rapidapi.com/titles/search/title/${keyword}?page=${page}`,
+        params: {
+          exact: 'false',
+          startYear: '2010',
+          endYear: '2023',
+          sort: `${ascdesc}`,
+          
+          titleType: `${type}`,
+
+        },
+        headers: {
+          'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
+          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+        }
+      });
+      setMovies(response.data);
+      setIsLoading(false);
+      setDataLoaded(true);
+    } catch (error) {
+      console.log("error al obtener películas", error);
+      setIsLoading(false);
+    }
+  };
+
+  const fetchMoviesByNameAndYear = async (keyword, page ) => {
+    try {
+      const response = await axios.request({
+        method: 'GET',
+        url: `https://moviesdatabase.p.rapidapi.com/titles/search/title/${keyword}?page=${page}`,
+        params: {
+          exact: 'true',
+          year : `${year}`
+          
+
+        },
+        headers: {
+          'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
+          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+        }
+      });
+      setMovies(response.data);
+      setIsLoading(false);
+      setDataLoaded(true);
+    } catch (error) {
+      console.log("error al obtener películas", error);
+      setIsLoading(false);
+    }
+  };
+
+  console.log(movies);
+
 
   const fetchMovies = async (page) => {
     try {
@@ -89,8 +145,6 @@ const MovieList = () => {
           startYear: '2010',
           endYear: '2023',
           sort: `${ascdesc}`,
-          
-          
         },
         headers: {
           'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
@@ -106,39 +160,16 @@ const MovieList = () => {
     }
   }
 
-  const fetchMoviesByType = async (page) => {
+  const fetchMoviesByType = async (page,year) => {
     try {
       const response = await axios.request({
         method: 'GET',
-        url: `https://moviesdatabase.p.rapidapi.com/titles?page=${page}`,
+        url: `https://moviesdatabase.p.rapidapi.com/titles?year=${year}&page=${page}`,
         params: {
           startYear: '2010',
           endYear: '2023',
           sort: `${ascdesc}`,
-          titleType: `${type}`
-          
-          
-        },
-        headers: {
-          'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
-          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-        }
-      });
-      setMovies(response.data)
-      setIsLoading(false);
-      setDataLoaded(true);
-    } catch (error) {
-      console.log("error al obtener películas", error);
-      setIsLoading(false);
-    }
-  }
-  
-  const fetchMoviesByYear = async (year) => {
-    try {
-      const response = await axios.request({
-        method: 'GET',
-        url: `https://moviesdatabase.p.rapidapi.com/titles`,
-        params: {
+          titleType: `${type}`,
           year: `${year}`
         },
         headers: {
@@ -156,13 +187,72 @@ const MovieList = () => {
   }
 
 
+  
+  const fetchMoviesByYear = async (year, page) => {
+    try {
+      const response = await axios.request({
+        method: 'GET',
+        url: `https://moviesdatabase.p.rapidapi.com/titles?page=${page}`,
+        params: {
+          year: `${year}`
+          
+        },
+        headers: {
+          'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
+          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+        }
+      });
+      setMovies(response.data)
+      setIsLoading(false);
+      setDataLoaded(true);
+    } catch (error) {
+      console.log("error al obtener películas", error);
+      setIsLoading(false);
+    }
+  }
+
+  const fetchMoviesByYearandType = async (year, page) => {
+    try {
+      const response = await axios.request({
+        method: 'GET',
+        url: `https://moviesdatabase.p.rapidapi.com/titles?page=${page}`,
+        params: {
+          year: `${year}`,
+          titleType: `${type}`,
+        },
+        headers: {
+          'X-RapidAPI-Key': '011271e1efmshd2ff1ab72a2356bp1f5e61jsnf423094948a1',
+          'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+        }
+      });
+      setMovies(response.data)
+      setIsLoading(false);
+      setDataLoaded(true);
+    } catch (error) {
+      console.log("error al obtener películas", error);
+      setIsLoading(false);
+    }
+  }
+
+
+
   //UseEffect para que cuando apenas se monte la pagina me traiga las peliculas, se actualiza cuando se modifica page.
   useEffect(() => {
-   if(keyword) {
+   
+    if(keyword && year!=="Año"){
+      fetchMoviesByNameAndYear(keyword, page)
+     }
+   else if(keyword && type !== ""){
+    fetchMoviesByNameAndType(keyword, page)
+   } 
+    else if(keyword) {
     fetchMoviesByName(keyword, page)
-   } else if(year!=="Año") {
-    fetchMoviesByYear(year)
-   }else if(type!==""){
+   } else if(year!=="Año" && type !== "") {
+    fetchMoviesByYearandType(year, page)
+   }else if(year!=="Año"){
+    fetchMoviesByYear(year, page)
+   }
+   else if(type!==""){
     fetchMoviesByType(page)
    }else{
     fetchMovies(page)

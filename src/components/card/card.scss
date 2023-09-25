@@ -15,15 +15,18 @@
     border-radius: 10px;
     overflow: hidden;
     margin: 0.19rem;
-    margin-right: 2vw;
+    margin-right: 1.5vw;
     margin-bottom: 2vw;
     min-width:200px;
     height:26vw;
     z-index:0;
-    
-
     margin-left: 5vw;
 }
+
+.card__title{
+  font-size: .8rem;
+}
+
 
 
 
@@ -39,8 +42,8 @@
 
 @media (max-width: 960px) {
   .cards__img {
-     width: 25vw;
-     height: 40vw;
+     width: 20vw;
+     height: 30vw;
   }
 
   .cards{
@@ -48,6 +51,7 @@
     margin-left: 15vw;
     margin-top: 2vw;
   }
+  
 }
 
 
@@ -75,6 +79,7 @@
     font-size: 1rem;
     margin-bottom: 0.4rem;
     color: black;
+    width: 50%;
 }
 
 .card__runtime {
