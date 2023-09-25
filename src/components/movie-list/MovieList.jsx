@@ -26,7 +26,10 @@ const MovieList = () => {
   };
 
   const handleInput = (e) => {
-    setKeyword(e.target.value);
+    const newValue = e.target.value;
+    setTimeout(() => {
+      setKeyword(newValue);
+    }, 500);
   };
 
   const handleReset = (e) => {
@@ -258,17 +261,15 @@ const MovieList = () => {
   return (
     <div className="movie__list">
       <div className="searchbar-container">
-        <form onSubmit={(e) => handleInput(e)}>
-
+        <div className="searchbar-icon">
+        <HiMagnifyingGlass />
+        </div>
         <input
           className="searchbar"
           type="text"
           placeholder="What do you want to watch?" 
-          onKeyDown={(e) => e.key === "Enter" && handleInput(e)}
+          onChange={(e)=> handleInput(e)}
         />
-        <button type="submit"><HiMagnifyingGlass /></button>
-        </form>
-       
       
         </div>
         <div className="filter-container">
