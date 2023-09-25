@@ -13,18 +13,18 @@ const MovieSlide = () => {
   const images = [
     {
       img: marvel,
-      title: "Avengers",
-      text: "saraza",
+      title: "Avengers :",
+      text: "Los Avengers se unen para salvar el mundo de la amenaza de Loki y su ejército alienígena.",
     },
     {
       img: starwars,
-      title: "Starwars",
-      text: "saraza2",
+      title: "Starwars :",
+      text: "Rey y Finn se embarcan en una aventura para ayudar a la Resistencia a luchar contra la Primera Orden.",
     },
     {
       img: it,
-      title: "It",
-      text: "saraza3",
+      title: "It :",
+      text: "El Club de los Perdedores regresa a Derry para enfrentar nuevamente a Pennywise.",
     },
   ];
 

@@ -1,4 +1,5 @@
 @use "../../scss/" as *;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,700&display=swap");
 
 .slide-container {
   position: relative;
@@ -25,10 +26,33 @@
 }
 
 .slide-title {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 5vw;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+
+  @include tablet {
+    width: 30%;
+  }
+  @include mobile {
+    font-size: 4vw;
+    width: 60%;
+    margin-top: 2vw;
+  }
 }
 
 .slide-text {
-  font-size: 16px;
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  width: 40%;
+  font-size: 2vw;
+
+  @include tablet {
+    width: 30%;
+  }
+  @include mobile {
+    font-size: 2vw;
+    width: 50%;
+  }
 }
+
+
