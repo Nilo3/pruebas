@@ -1,11 +1,12 @@
 import React from "react";
 import "./button.scss"
+import { AiFillPlayCircle } from "react-icons/ai"
 
 
 const Button = () => {
     return (
         <button className="btn">
-            WATCH TRAILER
+           <AiFillPlayCircle className="play" /> WATCH TRAILER
         </button>
     )
 }

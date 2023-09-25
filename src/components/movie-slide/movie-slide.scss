@@ -41,9 +41,10 @@
 }
 
 .slide-text {
-  font-weight: 700;
+  font-weight: 500;
   font-family: 'DM Sans', sans-serif;
   width: 40%;
+  font-size: 2vw;
 
   @include tablet {
     width: 30%;
@@ -55,6 +56,3 @@
 }
 
 
-.btn{
-  width: 50vw;
-}

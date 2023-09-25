@@ -4,6 +4,8 @@ import "./movie-list.scss";
 import Card from "../card/Card";
 import ReactPaginate from "react-paginate";
 
+import { HiMagnifyingGlass } from "react-icons/hi2"
+
 
 
 
@@ -15,17 +17,13 @@ const MovieList = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
-  const [year, setYear] = useState("Año");
+  const [year, setYear] = useState("AÑO");
   const [ascdesc, setAscdesc] = useState("");
   const [type, setType] = useState("");
 
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
   };
-
-
-  
-  
 
   const handleInput = (e) => {
     setKeyword(e.target.value);
@@ -40,7 +38,7 @@ const MovieList = () => {
   };
 
   const handleOrder = (e) => {
-    if (e.target.value === "Reciente") {
+    if (e.target.value === "RECIENTE") {
       setAscdesc("year.decr");
     } else {
       setAscdesc("year.incr");
@@ -112,7 +110,7 @@ const MovieList = () => {
         method: "GET",
         url: `https://moviesdatabase.p.rapidapi.com/titles/search/title/${keyword}?page=${page}`,
         params: {
-          exact: "true",
+          exact: "false",
           year: `${year}`,
         },
         headers: {
@@ -233,15 +231,18 @@ const MovieList = () => {
 
   //UseEffect para que cuando apenas se monte la pagina me traiga las peliculas, se actualiza cuando se modifica page.
   useEffect(() => {
-    if (keyword && year !== "Año") {
+    if (keyword && year !== "AÑO") {
       fetchMoviesByNameAndYear(keyword, page);
     } else if (keyword && type !== "") {
       fetchMoviesByNameAndType(keyword, page);
     } else if (keyword) {
       fetchMoviesByName(keyword, page);
-    } else if (year !== "Año" && type !== "") {
+    } else if (year !=="AÑO" && type==="todo") {
+      fetchMoviesByYear(year,page)
+    }
+    else if (year !== "AÑO" && type !== "") {
       fetchMoviesByYearandType(year, page);
-    } else if (year !== "Año") {
+    } else if (year !== "AÑO") {
       fetchMoviesByYear(year, page);
     } else if (type !== "") {
       fetchMoviesByType(page);
@@ -252,17 +253,22 @@ const MovieList = () => {
 
   //
   const years = ["AÑO", 2021, 2022, 2023];
-  const ordenar = ["ORDENAR ", "Reciente", "Antiguo"];
+  const ordenar = ["ORDENAR ", "RECIENTE", "ANTIGUO"];
 
   return (
     <div className="movie__list">
       <div className="searchbar-container">
+        <form onSubmit={(e) => handleInput(e)}>
+
         <input
           className="searchbar"
           type="text"
-          placeholder="What do you want to watch?"
+          placeholder="What do you want to watch?" 
           onKeyDown={(e) => e.key === "Enter" && handleInput(e)}
         />
+        <button type="submit"><HiMagnifyingGlass /></button>
+        </form>
+       
       
         </div>
         <div className="filter-container">
@@ -282,8 +288,8 @@ const MovieList = () => {
         </select>
         <select className="filter-movies" onChange={handleTypes}>
           <option value="todo">TODO</option>
-          <option className="sectiontext" value="movie">Peliculas</option>
-          <option className="sectiontext" value="tvSeries">Series</option>
+          <option className="sectiontext" value="movie">PELICULAS</option>
+          <option className="sectiontext" value="tvSeries">SERIES</option>
         </select>
 
         <button className="reset" onClick={handleReset}>LIMPIAR</button>
