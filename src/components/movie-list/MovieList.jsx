@@ -4,7 +4,10 @@ import "./movie-list.scss";
 import Card from "../card/Card";
 import ReactPaginate from "react-paginate";
 
-import { BsArrowDownUp } from "react-icons/bs"
+
+
+
+
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -19,6 +22,10 @@ const MovieList = () => {
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
   };
+
+
+  
+  
 
   const handleInput = (e) => {
     setKeyword(e.target.value);
@@ -44,7 +51,6 @@ const MovieList = () => {
     setType(e.target.value);
   };
 
-  console.log(type);
 
   const fetchMoviesByName = async (keyword, page) => {
     try {
@@ -254,32 +260,33 @@ const MovieList = () => {
         <input
           className="searchbar"
           type="text"
-          placeholder="What do you want to watch"
+          placeholder="What do you want to watch?"
           onKeyDown={(e) => e.key === "Enter" && handleInput(e)}
         />
+      
         </div>
         <div className="filter-container">
         <select className="filter-year" key={year} value={year} onChange={handleYear}>
           {years.map((year) => (
-            <option key={year} value={year}>
+            <option className="sectiontext" key={year} value={year}>
               {year}
             </option>
           ))}
         </select>
         <select className="filter-order" key={ascdesc} value={ascdesc} onChange={handleOrder}>
           {ordenar.map((orden) => (
-            <option key={orden} value={orden}>
+            <option className="sectiontext" key={orden} value={orden}>
               {orden}
             </option>
           ))}
         </select>
         <select className="filter-movies" onChange={handleTypes}>
-          <option value="">Todo</option>
-          <option value="movie">Peliculas</option>
-          <option value="tvSeries">Series</option>
+          <option value="todo">TODO</option>
+          <option className="sectiontext" value="movie">Peliculas</option>
+          <option className="sectiontext" value="tvSeries">Series</option>
         </select>
 
-        <button className="reset" onClick={handleReset}>Limpiar</button>
+        <button className="reset" onClick={handleReset}>LIMPIAR</button>
       </div>
 
       
