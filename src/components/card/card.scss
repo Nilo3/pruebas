@@ -6,6 +6,11 @@
   display: flex;
   flex-wrap: wrap; /* Allow cards to wrap to the next row */
   justify-content: space-between; /* Space between cards */
+  position: relative;
+  top: 0; 
+  left: 0; 
+  
+
 }
 
 .cards {
@@ -92,7 +97,18 @@
 }
 
 .card__description {
-    font-style: italic;
-    font-size: .75rem;
-    margin-bottom: 0.25rem;
+  font-weight: bold;
+  font-size: .75rem;
+  margin-bottom: 0.25rem;
+  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 20px;
+  width: 4.8rem;
+  position: absolute;
+  top: 0;
+  left: 0; 
+  padding: 0.25rem 0.5rem;
+  z-index: 1; 
+  margin-top: 1vw;
+  margin-left: 0.5vw;
+  
 }

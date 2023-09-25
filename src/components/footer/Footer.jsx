@@ -10,10 +10,10 @@ const Footer = () =>{
     return (
         <footer>
             <div className="social-icons-container">
-            <a className="space"><FaFacebookSquare /></a>
-            <a className="space"><BsInstagram /></a>
-            <a className="space"><BsTwitter /></a>
-            <a className="space"><AiFillYoutube /></a>
+            <a href="" className="space"><FaFacebookSquare /></a>
+            <a href="" className="space"><BsInstagram /></a>
+            <a href="" className="space"><BsTwitter /></a>
+            <a href="" className="space"><AiFillYoutube /></a>
         </div>
             <ul className="footer-menu-container">
                 <li className="menu-item">Conditions of Use</li>
