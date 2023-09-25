@@ -19,21 +19,27 @@ const Card = ({ primaryImage, originalTitleText, releaseYear, titleType }) => {
         </SkeletonTheme>
       ) : (
         <>
-        <div className="card__container">
-        <img
-            className="cards__img"
-            src={primaryImage && primaryImage.url ? primaryImage.url : "https://camarasal.com/wp-content/uploads/2020/08/default-image-5-1.jpg"}
-            alt="test"
-          />
-          <div className="card__description">{titleType.text.toUpperCase()}</div>
-        </div>
-         
-          <div className="card__title">
-            {originalTitleText && originalTitleText.text}
+          <div className="card__container">
+            <img
+              className="cards__img"
+              src={
+                primaryImage && primaryImage.url
+                  ? primaryImage.url
+                  : "https://camarasal.com/wp-content/uploads/2020/08/default-image-5-1.jpg"
+              }
+              alt="test"
+            />
+            <div className="card__description">
+              {titleType.text.toUpperCase()}
+            </div>
           </div>
+
           {releaseYear && releaseYear.year ? (
             <div>{releaseYear.year}</div>
           ) : null}
+          <div className="card__title">
+            {originalTitleText && originalTitleText.text}
+          </div>
         </>
       )}
     </div>

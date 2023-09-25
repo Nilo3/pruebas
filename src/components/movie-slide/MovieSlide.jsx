@@ -2,8 +2,8 @@ import React from "react";
 import "./movie-slide.scss";
 import SwiperCore, { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper.scss"; 
-import Button from "../button/Button"
+import "swiper/swiper.scss";
+import Button from "../button/Button";
 
 import it from "../../assets/It.jpeg";
 import marvel from "../../assets/marvel.jpeg";
@@ -48,9 +48,7 @@ const MovieSlide = () => {
                 <p className="slide-text">{image.text}</p>
                 <Button />
               </div>
-             
             </div>
-            
           </SwiperSlide>
         ))}
       </Swiper>
