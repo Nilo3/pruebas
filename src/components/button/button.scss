@@ -8,7 +8,7 @@
     color: white;
     border-radius: 10px;
     padding: .2vw 2vw;
-    font-size: .8rem;
+    font-size: .7rem;
     font-weight: 700;
     
     position: relative;
@@ -20,7 +20,7 @@
     justify-content: center;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 720px) {
     .btn {
         font-size: .7rem;
         width: 100px;
