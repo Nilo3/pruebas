@@ -8,10 +8,10 @@ import { HiMagnifyingGlass } from "react-icons/hi2"
 
 
 
-
-
-
 const MovieList = () => {
+
+
+  // SETEO TODOS LOS ESTADOS CON LOS QUE VOY A TRABAJAR.
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -21,10 +21,14 @@ const MovieList = () => {
   const [ascdesc, setAscdesc] = useState("");
   const [type, setType] = useState("");
 
+
+  //FUNCION PARA EL MANEJO DE PAGINADO
   const handlePageClick = (data) => {
     setPage(data.selected + 1);
   };
 
+
+  //FUNCION PARA QUE LA SEARCHBAR SE DEMORE ENTRE EL INPUT DEL USUARIO Y EL SETEO DE LA KEYWORD A BUSCAR
   const handleInput = (e) => {
     const newValue = e.target.value;
     setTimeout(() => {
@@ -32,14 +36,17 @@ const MovieList = () => {
     }, 500);
   };
 
+  // FUNCION QUE RESETEA TODOS LOS FILTROS
   const handleReset = (e) => {
     window.location.reload();
   };
 
+  // FUNCION QUE SETEA EL AÑO SELECCIONADO POR EL USUARIO
   const handleYear = (e) => {
     setYear(e.target.value);
   };
 
+  // FUNCION QUE SETEA EL ORDENAMIENTO SEGUN AÑO DE SALIDA DE LA PELICULA
   const handleOrder = (e) => {
     if (e.target.value === "RECIENTE") {
       setAscdesc("year.decr");
@@ -48,11 +55,21 @@ const MovieList = () => {
     }
   };
 
+
+
+  // FUNCION QUE SETEA EL TIPO DE CONTENIDO MOVIE/SERIE
   const handleTypes = (e) => {
     setType(e.target.value);
   };
 
 
+
+  //////////    SOLICITUDES A LA API, LAS REALIZO DESDE EL COMPONENTE PARA TRABAJAR UNICAMENTE CON ESTADOS LOCALES      ////
+
+  // SE QUE DEJAR LAS APIKEY EN EL COMPONENTE ES UNA MUY MALA PRACTICA, PERO TUVE PROBLEMAS DE WEBPACK QUE NO PUDE SOLUCIONAR Y NO ME DEJO USARLAS DESDE EL .ENV
+  // EN ESTE CASO AL SER ALGO TECNICO, ME CENTRE MAS EN LA FUNCIONALIDAD Y EN EL TIEMPO, MAS QUE EN LA SEGURIDAD. 
+
+  // SOLICITUD A LA API DE PELICULAS POR NOMBRE
   const fetchMoviesByName = async (keyword, page) => {
     try {
       const response = await axios.request({
@@ -79,6 +96,8 @@ const MovieList = () => {
     }
   };
 
+
+  // SOLICITUD A LA API DE PELICULAS POR NOMBRE Y TIPO
   const fetchMoviesByNameAndType = async (keyword, page) => {
     try {
       const response = await axios.request({
@@ -107,6 +126,8 @@ const MovieList = () => {
     }
   };
 
+
+  // SOLICITUD A LA API DE PELICULAS POR NOMBRE Y AÑO
   const fetchMoviesByNameAndYear = async (keyword, page) => {
     try {
       const response = await axios.request({
@@ -132,7 +153,7 @@ const MovieList = () => {
   };
 
   
-
+  // SOLICITUD DE PELICULAS A LA API, ES LA SOLICITUD INICIAL CON LA QUE SE CARGA LA PAGINA
   const fetchMovies = async (page) => {
     try {
       const response = await axios.request({
@@ -158,6 +179,8 @@ const MovieList = () => {
     }
   };
 
+
+  // SOLICITUD A LA API DE PELICULAS POR TIPO 
   const fetchMoviesByType = async (page, year) => {
     try {
       const response = await axios.request({
@@ -185,6 +208,8 @@ const MovieList = () => {
     }
   };
 
+
+  // SOLICITUD A LA API DE PELICULAS POR AÑO
   const fetchMoviesByYear = async (year, page) => {
     try {
       const response = await axios.request({
@@ -208,6 +233,8 @@ const MovieList = () => {
     }
   };
 
+
+  // SOLICITUD A LA API DE PELICULAS POR AÑO Y TIPO
   const fetchMoviesByYearandType = async (year, page) => {
     try {
       const response = await axios.request({
@@ -232,7 +259,8 @@ const MovieList = () => {
     }
   };
 
-  //UseEffect para que cuando apenas se monte la pagina me traiga las peliculas, se actualiza cuando se modifica page.
+  //UseEffect ES QUIEN MANEJA CASI TODO, CUANDO APENAS SE MONTE LA PAGINA Y NO SE CUMPLAN LAS CONDICIONES NOS VA A IR DEJANDO FILTRAR O NO. 
+
   useEffect(() => {
     if (keyword && year !== "AÑO") {
       fetchMoviesByNameAndYear(keyword, page);
@@ -254,7 +282,7 @@ const MovieList = () => {
     }
   }, [page, keyword, year, ascdesc, type]);
 
-  //
+  // CONSTANTES PARA MAPEARLAS
   const years = ["AÑO", 2021, 2022, 2023];
   const ordenar = ["ORDENAR ", "RECIENTE", "ANTIGUO"];
 
